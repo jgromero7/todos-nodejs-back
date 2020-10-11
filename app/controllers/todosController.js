@@ -88,6 +88,18 @@ todosController.update = async (req, res) => {
         return res.status(500).send({ message: 'Internal Error Server', data: null });
     }
 
+    try {
+        // Search For Task
+        existTask = await Todos.findOne({ task });
+
+        // If exist task return errors
+        if (existTask) return res.status(409).send({ message: 'The task is already exist', data: null});
+        
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Internal Error Server', data: null });
+    }
+
     // Update Register
     await Todos.findByIdAndUpdate({_id: id}, { task }, (err, todo) => {
 
