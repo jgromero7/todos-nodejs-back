@@ -14,7 +14,7 @@ module.exports = app => {
     require('../database');
 
     // Settings
-    app.set('port', process.env.APP_PORT || 8080);
+    app.set('port', process.env.PORT || 8080);
 
     // middlerware
     app.use(morgan('dev'));    
